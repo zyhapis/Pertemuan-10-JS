@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <!-- Tambahkan link ke Tailwind CSS dan tambahkan warna sesuai palet warna -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-indigo-900 text-white h-screen flex items-center justify-center">
+    <div class="bg-indigo-500 p-6 rounded shadow-md w-96 text-center">
+        <h1 class="text-2xl font-bold mb-4">Currency Converter</h1>
+
+        <div class="flex items-center mb-4">
+            <div class="w-1/2">
+                <label for="fromCurrency" class="text-sm mb-2 block hover:text-yellow-500 outline-none">From Currency:</label>
+                <div class="relative">
+                    <select id="fromCurrency" class="w-full px-3 py-2 border rounded text-yellow-500 outline-none">
+                        <!-- Pilihan mata uang akan diisi melalui JavaScript -->
+                    </select>
+                    <img src="" alt="" class="from-icon icon absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 mr-4">
+                </div>
+            </div>
+
+            <div class="w-1/2 ml-4">
+                <label for="toCurrency" class="text-sm mb-2 block hover:text-yellow-500 outline-none">To Currency:</label>
+                <div class="relative">
+                    <select id="toCurrency" class="w-full px-3 py-2 border rounded text-yellow-500 outline-none">
+                        <!-- Pilihan mata uang akan diisi melalui JavaScript -->
+                    </select>
+                    <img src="" alt="" class="to-icon icon absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 mr-4">
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="amount" class="text-sm block hover:text-yellow-500 outline-none">Amount:</label>
+            <input type="number" id="amount" value="1" class="w-full px-3 py-2 border rounded text-yellow-500 outline-none" onkeypress="handleKeyPress(event)">
+        </div>
+
+        <button id="convertButton" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Convert</button>
+
+        <p class="exchange_rate text-lg font-semibold mt-6">
+            <!-- Hasil konversi akan ditampilkan di sini -->
+        </p>
+    </div>
+
+    <script>
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                getExchangeValue();
+            }
+        }
+
+        function getExchangeValue() {
+
+        }
+
+        
+        const data = {
+            "data": {
+                "AUD": 1.5842602559,
+                "BGN": 1.8420402061,
+                "BRL": 5.0331507897,
+                "CAD": 1.3716102127,
+                "CHF": 0.8922501303,
+                "CNY": 7.3166913248,
+                "CZK": 23.2233224781,
+                "DKK": 7.031381173,
+                "EUR": 0.9437601439,
+                "GBP": 0.8224401396,
+                "HKD": 7.8253008171,
+                "HRK": 7.0463011528,
+                "HUF": 360.4101162844,
+                "IDR": 15860.236904112,
+                "ILS": 4.0623307061,
+                "INR": 83.1382940456,
+                "ISK": 138.567656993,
+                "JPY": 149.9124275149,
+                "KRW": 1347.9510264278,
+                "MXN": 18.2435134238,
+                "MYR": 4.7677705595,
+                "NOK": 11.0641612908,
+                "NZD": 1.7162702925,
+                "PHP": 56.7747971588,
+                "PLN": 4.2083205449,
+                "RON": 4.6946605744,
+                "RUB": 95.7266050971,
+                "SEK": 10.9724617589,
+                "SGD": 1.3713201986,
+                "THB": 36.4811863427,
+                "TRY": 27.9579632308,
+                "USD": 1,
+                "ZAR": 18.9632319943
+            }
+        };
+
+        const countryFlags = {
+            "AUD": "img/australia.png",
+            "BGN": "img/bulgaria.png",
+            "BRL": "img/brazil.png",
+            "CAD": "img/canada.png",
+            "CHF": "img/switzerland.png",
+            "CNY": "img/china.png",
+            "CZK": "img/czech-republic.png",
+            "DKK": "img/denmark.png",
+            "EUR": "img/european-union.png",
+            "GBP": "img/united-kingdom.png",
+            "HKD": "img/hong-kong.png",
+            "HRK": "img/croatia.png",
+            "HUF": "img/hungary.png",
+            "IDR": "img/indonesia.png",
+            "ILS": "img/israel.png",
+            "INR": "img/india.png",
+            "ISK": "img/iceland.png",
+            "JPY": "img/japan.png",
+            "KRW": "img/south-korea.png",
+            "MXN": "img/mexico.png",
+            "MYR": "img/malaysia.png",
+            "NOK": "img/norway.png",
+            "NZD": "img/new-zealand.png",
+            "PHP": "img/philippines.png",
+            "PLN": "img/poland.png",
+            "RON": "img/romania.png",
+            "RUB": "img/russia.png",
+            "SEK": "img/sweden.png",
+            "SGD": "img/singapore.png",
+            "THB": "img/thailand.png",
+            "TRY": "img/turkey.png",
+            "USD": "img/united-states.png",
+            "ZAR": "img/south-africa.png"
+        };
+
+        const currencySymbols = {
+            "AUD": "$",
+            "BGN": "лв",
+            "BRL": "R$",
+            "CAD": "$",
+            "CHF": "Fr",
+            "CNY": "¥",
+            "CZK": "Kč",
+            "DKK": "kr",
+            "EUR": "€",
+            "GBP": "£",
+            "HKD": "$",
+            "HRK": "kn",
+            "HUF": "Ft",
+            "IDR": "Rp",
+            "ILS": "₪",
+            "INR": "₹",
+            "ISK": "kr",
+            "JPY": "¥",
+            "KRW": "₩",
+            "MXN": "$",
+            "MYR": "RM",
+            "NOK": "kr",
+            "NZD": "$",
+            "PHP": "₱",
+            "PLN": "zł",
+            "RON": "lei",
+            "RUB": "₽",
+            "SEK": "kr",
+            "SGD": "$",
+            "THB": "฿",
+            "TRY": "₺",
+            "USD": "$",
+            "ZAR": "R"
+        };
+
+        const fromCurrencySelect = document.getElementById('fromCurrency');
+        const toCurrencySelect = document.getElementById('toCurrency');
+        const amountInput = document.getElementById('amount');
+        const convertButton = document.getElementById('convertButton');
+        const exchangeRateParagraph = document.querySelector('.exchange_rate');
+        const fromCurrencyFlag = document.querySelector('.from-icon');
+        const toCurrencyFlag = document.querySelector('.to-icon');
+
+        // Fungsi untuk mengisi pilihan mata uang
+        function fillCurrencyOptions() {
+            for (const currency in data.data) {
+                fromCurrencySelect.innerHTML += `<option value="${currency}">${currency}</option>`;
+                toCurrencySelect.innerHTML += `<option value="${currency}">${currency}</option>`;
+            }
+        }
+
+        // Fungsi untuk mengganti semua bendera mata uang
+        function changeCurrencyFlags() {
+            const fromCurrencyCode = fromCurrencySelect.value;
+            const toCurrencyCode = toCurrencySelect.value;
+
+            fromCurrencyFlag.src = countryFlags[fromCurrencyCode];
+            toCurrencyFlag.src = countryFlags[toCurrencyCode];
+        }
+
+        // Fungsi untuk mengonversi mata uang
+        function convertCurrency() {
+            const fromCurrency = fromCurrencySelect.value;
+            const toCurrency = toCurrencySelect.value;
+            const amount = parseFloat(amountInput.value);
+
+            const exchangeRate = data.data[toCurrency] / data.data[fromCurrency];
+            const convertedAmount = (amount * exchangeRate).toFixed(2);
+
+            const toSymbol = currencySymbols[toCurrency];
+
+            exchangeRateParagraph.textContent = `${toSymbol} ${convertedAmount}`;
+        }
+
+        // Event listener saat tombol "Convert" diklik
+        convertButton.addEventListener('click', convertCurrency);
+
+        // Event listener saat mata uang asal berubah
+        fromCurrencySelect.addEventListener('change', changeCurrencyFlags);
+
+        // Event listener saat mata uang tujuan berubah
+        toCurrencySelect.addEventListener('change', changeCurrencyFlags);
+
+        // Isi pilihan mata uang
+        fillCurrencyOptions();
+        // Set bendera mata uang awal
+        changeCurrencyFlags();
+
+        // Konversi mata uang saat halaman dimuat
+        convertCurrency();
+    </script>
+</body>
+</html>
